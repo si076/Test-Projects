@@ -1,0 +1,5 @@
+.category_all_div {
+    overflow-y:auto;
+    min-height: 500px;
+    max-height: 500px;
+}

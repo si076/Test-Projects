@@ -1,0 +1,50 @@
+<!-- <div class="objdisp" [ngStyle]="currentStyles"> -->
+<div class="objdisp">
+    <h3 class="objdisp_h2">{{catObj.getTitle()}}</h3>
+    <div class="objdisp_comb">
+        <p class="objdisp_p">{{catObj.getDescription()}}
+        </p>
+        <div class="objdisp_bottom_line">
+            <div class="objdisp_bottom_inline">
+                <a *ngIf="catObj.isFirstMeetingFreeOfCharge() === true" class="objdisp_free_href" href="">Запазете първа
+                безплатна медиация</a>
+                <div>    
+                    <img class="objdisp_img" src="./assets/timer24_24_transp.png" alt="">
+                    <span class="objdisp_quantity_span">{{catObj.getDuration()}}</span>
+                    <span class="objdisp_measur_span">{{measurementUnits.duration}}</span>
+                </div>
+                <div class="objdisp_bottom_inline">
+                    <img class="objdisp_img" src="./assets/location24_24_transp.png" alt="">
+                    <div>
+                        <div *ngFor="let loc of catObj.getLocations()"><span>{{loc}}</span></div>
+                    </div>
+                </div>
+                <a class="objdisp_reserve_href" href="">Запазете медиация</a>
+            </div>
+            <div class="objdisp_bottom_inline">
+                <div class="objdisp_bottom_inline">
+                    <img class="objdisp_img" src="./assets/participants24_24_transp.png" alt="">
+                    <div>
+                        <div *ngFor="let pr of catObj.getPrices()">
+                            <span *ngIf="pr.minParticipants === pr.maxParticipants" class="objdisp_quantity_span">{{pr.minParticipants}}</span>
+                            <span *ngIf="pr.minParticipants < pr.maxParticipants" class="objdisp_quantity_span">{{pr.minParticipants}} - {{pr.maxParticipants}}</span>
+                            <span class="objdisp_measur_span">{{measurementUnits.participantNumber}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="objdisp_bottom_inline">
+                    <img class="objdisp_img" src="./assets/price24_24_transp.png" alt="">
+                    <div>
+                        <div *ngFor="let pr of catObj.getPrices()">
+                            <span *ngIf="pr.minParticipants === pr.maxParticipants" class="objdisp_quantity_span">{{pr.minParticipants}}</span>
+                            <span *ngIf="pr.minParticipants < pr.maxParticipants" class="objdisp_quantity_span">{{pr.minParticipants}} - {{pr.maxParticipants}}</span>
+                            <span class="objdisp_measur_span">{{measurementUnits.participantNumber}}</span>
+                            <span class="objdisp_quantity_span">{{pr.price}}</span>
+                            <span class="objdisp_measur_span">{{measurementUnits.price}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
