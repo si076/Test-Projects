@@ -57,6 +57,13 @@ export class CategoryComponent implements OnInit {
 
   loadCategoryObjects() {
     this.catObjects = this.dataService.getCategoryObjects(this.category);
+
+    if (this.category === 'mediations') {
+
+      setTimeout(() => {
+        this.catObjects = this.catObjects.concat(this.catObjects);
+      }, 2000);
+    }
   }
 
 }
