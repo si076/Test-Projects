@@ -1,0 +1,17 @@
+<div class="content" role="main">
+    <div class="card-container">
+      <a class="card" [routerLink]="[{ outlets: { mnavig: 'home' } }]" routerLinkActive="active">
+      <!-- <a class="card" routerLink="main:home" routerLinkActive="active"> -->
+        <span>Начало</span>
+      </a>
+
+      <a *ngFor="let category of categories" class="card" [routerLink]="[{ outlets: { mnavig: ['category', category.category] } }]" routerLinkActive="active">
+        <span>{{category.translation}}</span>
+      </a>
+
+    </div>
+
+    <div class="contComp">
+      <router-outlet name="mnavig"></router-outlet>
+    </div>
+  </div>

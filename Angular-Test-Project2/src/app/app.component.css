@@ -36,8 +36,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 10%;
-    /* display: flex; */
+    height: 32px;
+    display: flex;
     align-items: center;
     background-color: #1976d2;
     color: white;
@@ -49,95 +49,44 @@
     margin: 0 16px;
   }
 
-  .content {
-    display: flex;
-    /* margin: 82px auto 32px; */
-    /* margin-top: 82px; */
-    padding: 0 16px;
-    max-width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
-    background-color: rgb(194, 199, 233);
+  .user_menu {
+    position: absolute;
+    right: 0;
+    height: 32px;
   }
 
-  .card-container {
-    display: flex;
-    flex-wrap: row wrap;
-    justify-content: center;
-    align-items: center;
-    margin-top: 16px;
-    
+  .user_menu_button {
+    border-width: 0px;
+    height: 32px;
+    background-color: rgb(210, 230, 230);
   }
 
-  .card {
-    all: unset;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 20px;
-    width: 140px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
+  .user_menu_panel {
+    display: grid;
+    grid-template-columns: 32px max-content;
+    position: absolute;
+    right: 0;
+    z-index: 1000000;
+    /* width: 250px; */
+    /* height: 200px; */
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 0s linear 120ms,opacity 120ms ease;
+    background-color: rgb(210, 230, 230);
+    color: #333;
+    border-width: 0px;
   }
 
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
+  .user_menu_panel>a {
+    margin-left: 5px;
+    grid-column: 2;
+  }
+  
+  .user_menu_panel_visible {
+    opacity: 1;
+    visibility:visible;
   }
 
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  .contComp {
-    /* display:block; */
-    /* min-width: 100%;
-    min-height: 100%; */
-    /* border-style: dotted;
-    border-width: 1px;
-    border-color: red; */
-    /* flex-grow: 1; */
-    max-width: 90%;
-    min-width: 90%;
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
 
 .footer {
   height: 10%;
@@ -148,16 +97,6 @@
   flex-shrink: 0;
 }
 
-  a,
-  a:visited,
-  a:hover {
-    color: #0a1e33;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
 
   footer {
     margin-top: 8px;
@@ -172,51 +111,4 @@
   footer a {
     display: flex;
     align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27,31,35,.2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg,#fafbfc,#eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg,#f0f3f6,#e6ebf1 90%);
-    border-color: rgba(27,31,35,.35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-    .card-container > *:not(.circle-link) ,
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
   }

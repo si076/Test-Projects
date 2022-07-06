@@ -13,6 +13,9 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import '@angular/common/locales/bg';
 import { ObjectdispComponent } from './objectdisp/objectdisp.component';
 import { CategoryComponent } from './category/category.component';
+import { CategorymanagerComponent } from './categorymanager/categorymanager.component';
+import { MainComponent } from './main/main.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +24,10 @@ import { CategoryComponent } from './category/category.component';
     MediatorsComponent,
     MediatorComponent,
     ObjectdispComponent,
-    CategoryComponent
+    CategoryComponent,
+    CategorymanagerComponent,
+    MainComponent,
+    UserComponent
   ],
   imports: [
     FormsModule,

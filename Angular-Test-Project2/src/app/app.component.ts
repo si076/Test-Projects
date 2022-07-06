@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 
-import {DataService} from './data.service';
-import type {Category} from './data.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,12 +8,25 @@ import type {Category} from './data.service';
 export class AppComponent  implements OnInit {
   title = 'Angular-Test-Project2';
 
-  categories: Category[] = [];
 
-  constructor(private dataService: DataService) {}
+  userMenuPanelHidden = true;
+  userMenuPanellClass = 'user_menu_panel';
+
+  constructor() {}
 
   ngOnInit(): void {
-    this.categories = this.dataService.getCategories();
+  }
+
+  onUserMenu(): void {
+    console.log('onUserMenu');
+    if (this.userMenuPanelHidden === true) {
+      this.userMenuPanellClass = 'user_menu_panel_visible';
+      this.userMenuPanelHidden = false;
+    }
+    else {
+      this.userMenuPanellClass = 'user_menu_panel';
+      this.userMenuPanelHidden = true;
+    }
   }
 
 }
