@@ -61,31 +61,6 @@
     background-color: rgb(210, 230, 230);
   }
 
-  .user_menu_panel {
-    display: grid;
-    grid-template-columns: 32px max-content;
-    position: absolute;
-    right: 0;
-    z-index: 1000000;
-    /* width: 250px; */
-    /* height: 200px; */
-    opacity: 0;
-    visibility: hidden;
-    transition: visibility 0s linear 120ms,opacity 120ms ease;
-    background-color: rgb(210, 230, 230);
-    color: #333;
-    border-width: 0px;
-  }
-
-  .user_menu_panel>a {
-    margin-left: 5px;
-    grid-column: 2;
-  }
-  
-  .user_menu_panel_visible {
-    opacity: 1;
-    visibility:visible;
-  }
 
 
 .footer {

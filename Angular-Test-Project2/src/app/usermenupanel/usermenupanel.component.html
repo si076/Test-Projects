@@ -1,0 +1,11 @@
+<div class="user_menu_panel" [hidden]="userMenuPanelHidden" 
+[ngClass]="userMenuPanellClass" (mouseleave)="onMouseLeave()">
+    
+    <div *ngIf="userMenuCtx; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <a  *ngFor="let uAction of userActions" [routerLink]="['user',{ outlets: {user_action: uAction.link}}]">{{uAction.actionName}}</a>
+    </ng-template>
+    <ng-template #elseBlock>
+        <a *ngFor="let uAction of userActions" [routerLink]="[{ outlets: {user_action: uAction.link}}]">{{uAction.actionName}}</a>
+    </ng-template>
+</div>

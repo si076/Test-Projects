@@ -1,0 +1,4 @@
+.user_cont {
+    display: grid;
+    grid-template-columns: min-content max-content;
+}

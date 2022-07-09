@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CatObject } from './CatObject';
 import { CatObjectIntf } from './CatObjectIntf';
+import { UserProfile } from './UserProfile';
+import { UserRights } from './UserRights';
 
 // export type Category = {category: string, translations: Map<string, string>};
 export type Category = {category: string, translation: string};
@@ -110,5 +112,13 @@ export class DataService {
   getMeasurementUnits(): MeasurementUnits {
     //just for testing
     return {duration: 'минути', participantNumber: 'участници', price: 'лв.'};
+  }
+
+  getUserRights(): UserRights {
+    return new UserRights(1, 1);
+  }
+
+  getUserProfile(): UserProfile {
+    return new UserProfile('userId');
   }
 }

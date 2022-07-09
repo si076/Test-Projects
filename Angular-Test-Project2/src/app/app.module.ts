@@ -16,6 +16,11 @@ import { CategoryComponent } from './category/category.component';
 import { CategorymanagerComponent } from './categorymanager/categorymanager.component';
 import { MainComponent } from './main/main.component';
 import { UserComponent } from './user/user.component';
+import { UserprofileComponent } from './userprofile/userprofile.component';
+import { UsermanagementComponent } from './usermanagement/usermanagement.component';
+import { UserobjectmanagementComponent } from './userobjectmanagement/userobjectmanagement.component';
+import { UsereventsmanagementComponent } from './usereventsmanagement/usereventsmanagement.component';
+import { UsermenupanelComponent } from './usermenupanel/usermenupanel.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,12 @@ import { UserComponent } from './user/user.component';
     CategoryComponent,
     CategorymanagerComponent,
     MainComponent,
-    UserComponent
+    UserComponent,
+    UserprofileComponent,
+    UsermanagementComponent,
+    UserobjectmanagementComponent,
+    UsereventsmanagementComponent,
+    UsermenupanelComponent
   ],
   imports: [
     FormsModule,

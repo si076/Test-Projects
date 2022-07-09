@@ -8,9 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent  implements OnInit {
   title = 'Angular-Test-Project2';
 
-
-  userMenuPanelHidden = true;
-  userMenuPanellClass = 'user_menu_panel';
+  userMenuPanelHidden: boolean = true;
 
   constructor() {}
 
@@ -18,13 +16,11 @@ export class AppComponent  implements OnInit {
   }
 
   onUserMenu(): void {
-    console.log('onUserMenu');
+    // console.log('onUserMenu ' + this.userMenuPanelHidden);
     if (this.userMenuPanelHidden === true) {
-      this.userMenuPanellClass = 'user_menu_panel_visible';
       this.userMenuPanelHidden = false;
     }
     else {
-      this.userMenuPanellClass = 'user_menu_panel';
       this.userMenuPanelHidden = true;
     }
   }

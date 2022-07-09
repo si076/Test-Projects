@@ -36,7 +36,7 @@ export class ObjectdispComponent implements OnInit {
       {'background-color': `rgba(${this.catObj.getBackgroundColour().r}, ${this.catObj.getBackgroundColour().g}, ${this.catObj.getBackgroundColour().b}, ${this.catObj.getBackgroundColour().a})`
       };
 
-    console.log(this.currentStyles);                      
+    // console.log(this.currentStyles);                      
   }
 
 }
