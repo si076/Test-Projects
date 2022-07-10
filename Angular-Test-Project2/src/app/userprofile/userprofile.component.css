@@ -1,0 +1,83 @@
+.user_profile {
+    margin: 5px 5px 5px 5px;
+}
+
+/* .user_prof_sec1 {
+    display: grid;
+    grid-template-columns: max-content auto;
+    column-gap: 10px;
+    row-gap: 10px;
+    max-width: 0%;
+}
+
+.user_prof_security {
+    display: grid;
+    grid-template-columns: max-content auto 1fr;
+    column-gap: 10px;
+    row-gap: 10px;
+} */
+
+.user_prof_calendars {
+    display: grid;
+    grid-template-columns: min-content min-content;
+    margin-top: 10px;
+}
+
+.user_prof_select, .user_prof_input{
+    margin-left: 10px;
+}
+
+.user_prof_line {
+    margin-top: 5px;
+}
+
+.user_prof_worktime_table {
+    margin-top: 5px;
+    display:inline-flexbox;
+}
+
+.user_prof_day_span, .user_prof_day_summary {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.user_prof_workingday_periods {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    grid-template-rows: min-content auto;
+    margin-left: 10px;
+    column-gap: 10px;
+}
+
+.user_prof_worktime_period_s {
+    display: grid;
+    grid-template-columns: auto min-content;
+}
+
+.user_prof_worktime_btn_grp {
+    display: grid;
+    grid-template-rows: min-content min-content;
+    row-gap: 2px;
+    margin-left: 2px;
+    margin-right: 2px;
+    margin-bottom: 2px;
+}
+
+.user_prof_worktime_period_s_btn, .user_prof_worktime_pattern_btn {
+    border-radius: 5px 5px 5px 5px;
+    border-width: 1px;
+    /* padding: 2px 2px 2px 2px; */
+}
+
+.user_prof_worktime_pattern_btn_grp {
+    display: grid;
+    grid-template-columns: 24px 24px;
+    grid-template-rows: 24px;
+    column-gap: 2px;
+    margin-left: 2px;
+}
+
+.user_prof_pattern {
+    display: inline-flex;
+    margin-top: 5px;
+}

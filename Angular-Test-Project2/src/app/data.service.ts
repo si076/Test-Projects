@@ -3,6 +3,7 @@ import { CatObject } from './CatObject';
 import { CatObjectIntf } from './CatObjectIntf';
 import { UserProfile } from './UserProfile';
 import { UserRights } from './UserRights';
+import { DayOff, WorkingDay, WorkingDaysPattern } from './WorkTime';
 
 // export type Category = {category: string, translations: Map<string, string>};
 export type Category = {category: string, translation: string};
@@ -120,5 +121,18 @@ export class DataService {
 
   getUserProfile(): UserProfile {
     return new UserProfile('userId');
+  }
+
+  getWorkingDaysPatterns(): WorkingDaysPattern[] {
+
+    const workingDaysPattern1 = new WorkingDaysPattern([
+      new WorkingDay(), 
+      new WorkingDay(),
+      new WorkingDay(),
+      new WorkingDay(),
+      new WorkingDay(),
+      new DayOff(),
+      new DayOff()]);
+    return [workingDaysPattern1];
   }
 }

@@ -37,10 +37,47 @@ export class Vacation {
     periods: Period[] = [];
 }
 
+export class WorkingDaysPattern {
+    
+    constructor(public pattern: WorkingDay[] = []) {}
+
+    public toString(): string {
+        let wd: number = 0, df: number = 0;
+        let patternString = '';
+        for (let i = 0; i < this.pattern.length; i++) {
+            const day = this.pattern[i];
+            
+            if (day instanceof DayOff) {
+                if (df === 0 && wd !== 0) {
+                    patternString += `${wd}-работни дни `;
+
+                    wd = 0;
+                }
+                df++;
+            } else {
+                if (df !== 0 && wd === 0) {
+                    patternString += `${df}-почивни дни `;
+
+                    df = 0;
+                }
+                wd++;
+
+            }
+        }
+        if (wd > 0) {
+            patternString += `${wd}-работни дни `;
+        } else if (df > 0) {
+            patternString += `${df}-почивни дни `;
+        }
+
+        return patternString;
+    }
+}
+
 export class WorkTime {
     workOnDayOffs: boolean = false;
     workOnOfficialHolidays: boolean = false;
-    workingPattern: WorkingDay[] = [];
+    workingPattern: WorkingDaysPattern | null = null;
     workingPatternSartsOnDay: DAY_OF_WEEK = DAY_OF_WEEK.UNDEFINED;
     workingPatternStartsOnDate: Date = new Date();
 }

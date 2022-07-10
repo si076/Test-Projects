@@ -1,1 +1,97 @@
-<p>userprofile works!</p>
+<div class="user_profile">
+
+    <div class="user_prof_sec1">
+        <div class="user_prof_line">
+            <label for="user_email">Електронна поща:</label>
+            <input class="user_prof_input" type="text" id="user_email" size="40">
+        </div>
+        <div class="user_prof_line">
+            <label for="user_first_name">Име:</label>
+            <input class="user_prof_input" type="text" id="user_first_name">
+        </div>
+        <div class="user_prof_line">
+            <label for="user_last_name">Фамилия:</label>
+            <input class="user_prof_input" type="text" id="user_last_name">
+        </div>
+    </div>
+
+    <hr>
+    <legend>Работно време</legend>
+
+    <div class="user_prof_worktime">
+        <div class="user_prof_pattern">
+            <label for="user_worktime_pattern_id">Шаблон работни дни:</label>
+            <select (change)="onWorkingDaysPatternChange($event)" class="user_prof_select" name="user_worktime_pattern" id="user_worktime_pattern_id">
+                <option *ngFor="let wdp of workingDaysPatterns; let i=index" value="{{i}}">{{wdp.toString()}}</option>
+            </select>
+            <div class="user_prof_worktime_pattern_btn_grp">
+                <button class="user_prof_worktime_pattern_btn">+</button>
+                <button class="user_prof_worktime_pattern_btn">-</button>
+            </div>
+        </div>
+        <div class="user_prof_line">
+            <label for="user_worktime_pattern_start_day_id">Шаблон работни дни започва на:</label>
+            <select class="user_prof_select" name="user_worktime_pattern_start_day" id="user_worktime_pattern_start_day_id">
+                <option value="monday">Понеделник</option>
+                <option value="tuesday">Вторник</option>
+                <option value="wednesday">Сряда</option>
+                <option value="thursday">Четвъртък</option>
+                <option value="friday">Петък</option>
+                <option value="saterday">Събота</option>
+                <option value="sunday">Неделя</option>
+            </select>
+        </div>
+        <div class="user_prof_worktime_table">
+            <div class="user_prof_line" *ngFor="let day of workingDayPattern?.pattern;let ind=index">
+                <div *ngIf="isDayOff(day); then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>
+                    <span class="user_prof_day_span">{{ind + 1}}-почивен ден</span>
+                </ng-template>
+                <ng-template #elseBlock>
+                    <!-- <div> -->
+                    <details [attr.open]="ind === 0 ? true : null">
+                        <summary class="user_prof_day_summary">*{{ind + 1}}-работен ден:</summary>
+                            
+                        <div class="user_prof_workingday_periods">
+                            <label for="">Време за работа</label>
+                            <label for="">Време за почивка</label>
+                            <div class="user_prof_worktime_period_s">
+                                <select name="" id="" multiple="true" size="3"></select>
+                                <div class="user_prof_worktime_btn_grp">
+                                    <button class="user_prof_worktime_period_s_btn">+</button>
+                                    <button class="user_prof_worktime_period_s_btn">-</button>
+                                </div>
+                            </div>
+                            <div class="user_prof_worktime_period_s">
+                                <select name="" id="" multiple="true" size="3"></select>
+                                <div class="user_prof_worktime_btn_grp">
+                                    <button class="user_prof_worktime_period_s_btn">+</button>
+                                    <button class="user_prof_worktime_period_s_btn">-</button>
+                                </div>
+                            </div>                            
+                        </div>
+                    </details>
+                    <!-- </div> -->
+                    <!-- <label for="{{ind}}-start">Начало:</label>
+                    <input class="user_prof_input" type="number" id="{{ind}}-start" size="2">
+                    <label for="{{ind}}-end">Край:</label>
+                    <input class="user_prof_input" type="number" id="{{ind}}-end" size="2"> -->
+                </ng-template>
+            </div>
+        </div>
+
+        <div class="user_prof_calendars">
+            <mwl-calendar-week-view   [viewDate]="viewDate"
+            [weekStartsOn]="weekStartsOn" [hourSegments]="1" [daysInWeek]="14">
+            </mwl-calendar-week-view>
+        </div>
+
+    </div>
+
+    <hr>
+    
+    <div class="user_prof_security">
+        <label for="user_password">Парола:</label>
+        <input class="user_prof_input" type="password" id="user_password">
+    </div>
+</div>
