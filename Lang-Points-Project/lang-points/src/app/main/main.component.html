@@ -1,0 +1,25 @@
+<div class="main_cont">
+
+    <div class="main_sidebar">
+
+    </div>
+    <div class="main_cont_pane">
+        <div class="main_search_pane">
+            <div class="main_search_pane_box">
+                <div class="main_search_line">
+                    <input class="main_search_input" type="text" size="60" 
+                           placeholder="Type in here your search"
+                           [(ngModel)]="searchValue">
+                    <!-- <button class="main_search_btn">Search</button> -->
+                </div>
+                <div class="main_search_check">
+                    <input type="checkbox" id="">
+                    <label for="">Search only in </label>
+                </div>
+            </div>
+        </div>
+        <div class="main_cont_cont">
+            <router-outlet name="main_cont"></router-outlet>
+        </div>
+    </div>
+</div>

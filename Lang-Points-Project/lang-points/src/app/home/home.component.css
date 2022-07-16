@@ -1,0 +1,49 @@
+.home_cont {
+    display: flex;
+    /* border-width: 2px; 
+    border-style: solid; 
+    border-color: blue; */
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+    background-color: rgb(188, 174, 228);
+}
+
+.home_wrapper {
+    display: block;
+    align-self: center;
+    justify-self: center;
+    /* border-width: 2px; 
+    border-style: solid; 
+    border-color: green; */
+}
+
+.home_lang {
+    display: grid;
+    grid-template-columns: 300px;
+    grid-template-rows: min-content 30px;
+}
+
+.home_from_lang {
+    margin-left: 0px;
+}
+
+.home_to_lang {
+    margin-top: 10px;
+    margin-left: 40px;
+}
+
+.home_go {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.home_go_btn {
+    margin-top: 10px;
+    border-radius: 10px 10px 10px 10px;
+    border-width: 1px;
+    border-style: solid;
+    width: 50px;
+    height: 20px;
+}
