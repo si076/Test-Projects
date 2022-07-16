@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -6,8 +6,6 @@ import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
-import { MediatorsComponent } from './mediators/mediators.component';
-import { MediatorComponent } from './mediator/mediator.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import '@angular/common/locales/bg';
@@ -21,13 +19,15 @@ import { UsermanagementComponent } from './usermanagement/usermanagement.compone
 import { UserobjectmanagementComponent } from './userobjectmanagement/userobjectmanagement.component';
 import { UsereventsmanagementComponent } from './usereventsmanagement/usereventsmanagement.component';
 import { UsermenupanelComponent } from './usermenupanel/usermenupanel.component';
+import { UserpresentComponent } from './userpresent/userpresent.component';
+import localeBg from '@angular/common/locales/bg';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeBg);
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    MediatorsComponent,
-    MediatorComponent,
     ObjectdispComponent,
     CategoryComponent,
     CategorymanagerComponent,
@@ -37,7 +37,8 @@ import { UsermenupanelComponent } from './usermenupanel/usermenupanel.component'
     UsermanagementComponent,
     UserobjectmanagementComponent,
     UsereventsmanagementComponent,
-    UsermenupanelComponent
+    UsermenupanelComponent,
+    UserpresentComponent
   ],
   imports: [
     FormsModule,
@@ -46,7 +47,7 @@ import { UsermenupanelComponent } from './usermenupanel/usermenupanel.component'
     BrowserAnimationsModule,
     CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'bg-BG'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

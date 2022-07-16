@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CategoryComponent } from './category/category.component';
 import { HomeComponent } from './home/home.component';
 import { MainComponent } from './main/main.component';
-import { MediatorsComponent } from './mediators/mediators.component';
 import { UserComponent } from './user/user.component';
 import { UsereventsmanagementComponent } from './usereventsmanagement/usereventsmanagement.component';
 import { UsermanagementComponent } from './usermanagement/usermanagement.component';

@@ -1,0 +1,28 @@
+.user_present {
+    display: block;
+    min-width: 350px;
+    width: 350px;
+    max-width: 350px;
+    min-height: 220px;
+    height: 220px;
+    max-height: 220px;
+}
+
+.user_photo_preview {
+    float: left;
+    border-style: dotted;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.user_name_preview {
+    display: block;
+    /* border: 1px solid red; */
+    text-align: center;
+    width: 100%;
+}
+
+.user_selfpresent_preview {
+    margin-left: 5px;
+    margin-right: 5px;
+}

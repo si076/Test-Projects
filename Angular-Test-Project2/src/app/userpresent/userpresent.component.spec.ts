@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MediatorComponent } from './mediator.component';
+import { UserpresentComponent } from './userpresent.component';
 
-describe('MediatorComponent', () => {
-  let component: MediatorComponent;
-  let fixture: ComponentFixture<MediatorComponent>;
+describe('UserpresentComponent', () => {
+  let component: UserpresentComponent;
+  let fixture: ComponentFixture<UserpresentComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MediatorComponent ]
+      declarations: [ UserpresentComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MediatorComponent);
+    fixture = TestBed.createComponent(UserpresentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

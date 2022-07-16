@@ -1,18 +1,44 @@
 <div class="user_profile">
 
     <div class="user_prof_sec1">
-        <div class="user_prof_line">
-            <label for="user_email">Електронна поща:</label>
-            <input class="user_prof_input" type="text" id="user_email" size="40">
+        <div>
+            <div class="user_prof_line">
+                <label class="user_prof_display_block" for="user_email">Електронна поща:</label>
+                <input class="user_prof_display_block" type="text" id="user_email" size="40" required>
+            </div>
+            <div class="user_prof_name">
+                <div class="user_prof_line">
+                    <label class="user_prof_display_block" for="user_first_name">Име:</label>
+                    <input class="user_prof_display_block" type="text" id="user_first_name" 
+                           required [(ngModel)]="userFirstName" (ngModelChange)="onUserNameChange()">
+                </div>
+                <div class="user_prof_line user_prof_ml">
+                    <label class="user_prof_display_block" for="user_last_name">Фамилия:</label>
+                    <input class="user_prof_display_block" type="text" id="user_last_name" 
+                           required [(ngModel)]="userLastName" (ngModelChange)="onUserNameChange()">
+                </div>
+            </div>
+            <div class="user_prof_line user_prof_photo_box">
+            <!-- <label for="user_photo">Ваша снимка:</label> -->
+                <img class="user_prof_photo" alt="Ваша снимка" id="user_photo_id"
+                     [src]="photo_url" >
+                <input class="user_photo_file_input" type="file" accept="image/png, image/jpeg"
+                       (change)="selectFile($event)">
+            </div>
+            <div class="user_prof_self_present">
+                <label class="user_prof_display_block" for="">Кратко представяне:</label>
+                <textarea class="user_prof_display_block" name="user_self_present" id="user_self_present_id" 
+                          cols="40" rows="5" [(ngModel)]="shortSelfPresentation"></textarea>
+            </div>
         </div>
-        <div class="user_prof_line">
-            <label for="user_first_name">Име:</label>
-            <input class="user_prof_input" type="text" id="user_first_name">
-        </div>
-        <div class="user_prof_line">
-            <label for="user_last_name">Фамилия:</label>
-            <input class="user_prof_input" type="text" id="user_last_name">
-        </div>
+
+        <div class="vertical_line"></div>
+        
+        <app-userpresent [fullName]="fullName" [photo_url]="photo_url" 
+                         [shortSelfPresentation]="shortSelfPresentation"
+                         borderClass="user_prof_present">
+        </app-userpresent>
+
     </div>
 
     <hr>
@@ -82,7 +108,8 @@
 
         <div class="user_prof_calendars">
             <mwl-calendar-week-view   [viewDate]="viewDate"
-            [weekStartsOn]="weekStartsOn" [hourSegments]="1" [daysInWeek]="14">
+            [weekStartsOn]="weekStartsOn" [hourSegments]="1" [daysInWeek]="14"
+            [locale]="locale">
             </mwl-calendar-week-view>
         </div>
 
