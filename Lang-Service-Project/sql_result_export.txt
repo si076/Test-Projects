@@ -1,3 +1,0 @@
-lang	name	plural_form	transliteration	gender	animate	declination_type
-ar	باب	NULL	NULL	m	i	3
-ar	بَيْت	NULL	NULL	m	i	3
