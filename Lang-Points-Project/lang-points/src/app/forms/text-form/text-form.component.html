@@ -1,0 +1,14 @@
+<div>
+
+    <div>
+        <div class="text_form_remaining_chars" [ngClass]="componentOrderStyle">
+            <label for="" [ngClass]="labelDirectStyle">{{labelText}}</label>
+            <span class="text_form_rem_chars_span" [ngClass]="labelDirectStyle">Maximum characters {{textMaxLength}}:  {{remainingCharacters}}</span>
+        </div>
+    </div>
+    <input type="text"
+           [ngClass]="inputDirectStyle" [(ngModel)]="text" 
+           [attr.size]="inputSize" [attr.maxlength]="textMaxLength"
+           (input)="onInput()">
+    
+</div>

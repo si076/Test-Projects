@@ -1,0 +1,60 @@
+<div>
+    <div class="noun_form_word_wrapper" [ngClass]="compOrderStyle">
+        <div class="noun_form_vert_alignment_box">
+            <label for="" [ngClass]="labelDirectStyle">Singular:</label>
+            <input type="text" [ngClass]="inputDirectStyle" 
+                    size="30" maxlength="50"
+                    [(ngModel)]="noun.singularFullForm">
+        </div>
+        <!-- <div class="noun_form_vert_alignment_box">
+            <div>/</div>
+            <div>/</div>
+        </div> -->
+        <div class="noun_form_vert_alignment_box">
+            <label for="" [ngClass]="labelDirectStyle">Plural:</label>
+            <input type="text" [ngClass]="inputDirectStyle"
+                    size="30" maxlength="50" 
+                    [(ngModel)]="noun.pluralFullForm">
+        </div>
+        <div class="noun_form_el_margins noun_form_vert_alignment_box">
+            <label for="" [ngClass]="labelDirectStyle">Transliteration:</label>
+            <input type="text" [ngClass]="inputDirectStyle"
+                    size="30" maxlength="50" 
+                    [(ngModel)]="noun.transliteration">
+        </div>
+    </div>
+    <div class="noun_form_word_wrapper" [ngClass]="compOrderStyle">
+        <div class="noun_form_el_margins noun_form_vert_alignment_box">
+            <label for="">Gender:</label>
+            <select name="" id="" [(ngModel)]="noun.gender">
+                <option value="m">m</option>
+                <option value="f">f</option>
+                <option value="n">n</option>
+            </select>
+        </div>
+        <div class="noun_form_vert_alignment_box">
+            <label for="">Declination type:</label>
+            <select name="" id="" [(ngModel)]="noun.declination_type">
+                <option value="3"></option>
+            </select>
+        </div>
+        <div class="noun_form_el_margins noun_form_vert_alignment_box">
+            <label for="">Animate:</label>
+            <select name="" id="" [(ngModel)]="noun.animate">
+                <option value="a">a</option>
+                <option value="i">i</option>
+            </select>
+        </div>
+    </div>
+    <app-text-form [componentOrderStyle]="translationCompOrederStyle" 
+                    [labelDirectStyle]="translationLabelDirectStyle" 
+                    [inputDirectStyle]="translationInputDirectStyle"
+                    [labelText]="translationLabelText"
+                    [(textFromParent)]="noun.translations_str">
+    </app-text-form>
+
+    <div class="noun_form_examples_pane">
+        <app-examples-form [(examples)]="noun.examples">
+        </app-examples-form>
+    </div>
+</div>

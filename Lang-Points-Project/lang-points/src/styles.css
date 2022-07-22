@@ -4,3 +4,19 @@ body, html {
     margin:0 0 0 0;
     padding: 0 0 0 0;
 }
+
+.ltr_row_flow {
+    flex-flow: row;
+}
+
+.rtl_row_flow {
+    flex-flow: row-reverse;
+}
+
+.direction_ltr {
+    direction: ltr;
+}
+
+.direction_rtl {
+    direction: rtl;
+}

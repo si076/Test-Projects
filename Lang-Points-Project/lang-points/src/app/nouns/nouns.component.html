@@ -1,0 +1,14 @@
+
+<button (click)="onAddNoun()">Add a noun</button>
+<div id="addNounDialog" class="modal" [ngStyle]="dialogInlineStyle">
+    <div class="modal-content">
+      <app-noun-form [noun]="currentNoun"></app-noun-form>
+      <menu>
+        <button id="nouns_dialog_cancel" type="reset" (click)="onCloseDialog()">&times; Cancel</button>
+        <button id="nouns_dialog_save" type="save" (click)="onSaveDialog()">Save</button>
+      </menu>
+    </div>
+</div>
+
+
+<app-noun *ngFor="let noun of nouns" [noun]="noun"></app-noun>

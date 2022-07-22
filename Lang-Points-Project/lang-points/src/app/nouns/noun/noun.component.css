@@ -1,0 +1,33 @@
+.noun_cont_box {
+    display: block;
+    border-bottom-style: dashed;
+    border-bottom-width: 1px;
+    font-size: xx-large;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.noun_word_box {
+    display: flex;
+    align-content: space-between;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.noun_el {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.noun_word_wrapper {
+    display: flex;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.noun_translations_wrapper {
+    display: inline;
+    margin-left: 10px;
+    margin-right: 10px;
+}

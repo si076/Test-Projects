@@ -1,0 +1,24 @@
+.noun_form_el_margins {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.noun_form_word_wrapper {
+    display: flex;
+    /* margin-left: 10px;
+    margin-right: 10px; */
+}
+
+.noun_form_vert_alignment_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.noun_form_word_box {
+    display: flex;
+
+}
+
+.noun_form_examples_pane {
+    margin-top: 10px;
+}

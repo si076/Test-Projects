@@ -1,0 +1,17 @@
+<div class="noun_cont_box">
+    <div class="noun_word_box" [ngClass]="componentOrderStyle">
+        <div class="noun_word_wrapper" [ngClass]="componentOrderStyle">
+            <div class="noun_el" [ngClass]="wordTextDirectionStyle">{{noun.singularFullForm}} / {{noun.pluralFullForm}}</div>
+            <div class="noun_el" [ngClass]="wordTextDirectionStyle">[{{noun.transliteration}}]</div>
+            <div class="noun_el" [ngClass]="wordTextDirectionStyle">({{noun.gender}}, {{noun.declination_type}}, {{noun.animate}})</div>
+        </div>
+        <div class="noun_translations_wrapper">
+            <ng-template  ngFor let-transl [ngForOf]="noun.translations">
+                <div class="noun_el" [ngClass]="transTextDirectStyle">{{transl}}</div>
+            </ng-template>
+        </div>
+    </div>
+    <div class="noun_examples_box">
+        <app-examples [examples]="noun.examples"></app-examples>
+    </div>
+</div>

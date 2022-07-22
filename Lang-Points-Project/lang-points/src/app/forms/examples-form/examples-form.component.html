@@ -1,0 +1,25 @@
+<div class="examples_wrapper">
+    
+    <button (click)="onExampleAdd()">Add an example</button>
+    <div class="examples_pane" >
+        <div *ngFor="let example of examples; index as i">
+            <fieldset>
+                <legend>Example {{i + 1}}:</legend>
+                <div>
+                    <app-text-form [componentOrderStyle]="exampleCompOrederStyle" 
+                                [labelDirectStyle]="exampleLabelDirectStyle" 
+                                [inputDirectStyle]="exampleInputDirectStyle"
+                                [labelText]="exampleLabelText"
+                                [(textFromParent)]="example.text"></app-text-form>
+                </div>
+                <div>
+                    <app-text-form [componentOrderStyle]="translationCompOrederStyle" 
+                                [labelDirectStyle]="translationLabelDirectStyle" 
+                                [inputDirectStyle]="translationInputDirectStyle"
+                                [labelText]="translationLabelText"
+                                [(textFromParent)]="example.translation"></app-text-form>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>

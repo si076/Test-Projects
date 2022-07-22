@@ -1,0 +1,10 @@
+.text_form_remaining_chars {
+    /* display: flex;
+    align-content: space-between;
+    justify-content: space-between; */
+}
+
+.text_form_rem_chars_span {
+    margin-left: 20px;
+    margin-right: 20px;
+}

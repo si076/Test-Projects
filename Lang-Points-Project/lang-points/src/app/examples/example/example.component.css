@@ -1,0 +1,12 @@
+.example_cont {
+    display: flex;    
+    align-content: space-between;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.example_margins {
+    margin-left: 10px;
+    margin-right: 10px;
+}
