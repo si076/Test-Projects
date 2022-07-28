@@ -1,10 +1,9 @@
 import "reflect-metadata";
-
-// import nounsRouter from './routes/nouns.mjs';
 import cors from 'cors';
 import e from 'express';
-import {getAlphabet, getAvailableLanguagesSync, getCharacteristics, getLangSettings, getLanguages } from "./controllers/languages.mjs"
+import {getAlphabet, getAvailableLanguagesSync, getCharacteristics, getDiacritics, getLangSettings, getLanguages } from "./controllers/languages.mjs"
 import { Language, LanguagesPerRequest } from "./controllers/TransfferedObjectsClasses.mjs";
+import {nounsRouter} from "./routes/nouns.mjs";
 // import * as bodyParser from 'bodyParser';
 
 
@@ -63,9 +62,8 @@ app.use('/languages', getLanguages);
 app.use('/:from_lang/alphabet', getAlphabet);
 app.use('/:from_lang/characteristics', getCharacteristics);
 app.use('/:from_lang/lang_settings', getLangSettings);
-// app.use('/:from_lang/:to_lang/lang_settings', langSettingsRouter);
-// app.use('/:from_lang/:to_lang/alphabets', alphabetRouter);
-// app.use('/:from_lang/:to_lang/nouns', nounsRouter); 
+app.use('/:from_lang/diacritics', getDiacritics);
+app.use('/:from_lang/:to_lang/nouns', nounsRouter); 
 
 app.listen(port);
 

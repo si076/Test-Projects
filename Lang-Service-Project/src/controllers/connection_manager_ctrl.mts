@@ -1,7 +1,7 @@
 // import {createConnection, ConnectionConfig, Connection, MysqlError} from 'mysql';
 import mysql from 'mysql';
 
-export class ConnectionManager {
+class ConnectionManager {
 
     private static pool: mysql.Pool | null = null;
 
@@ -16,10 +16,13 @@ export class ConnectionManager {
                 host: "localhost",
                 user: "test",
                 password: "test2020_",
-                multipleStatements: true
+                multipleStatements: true,
+                database: 'lang'
             });
 
         }
         return this.pool;
     }
 }
+
+export {ConnectionManager};

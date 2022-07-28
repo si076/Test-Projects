@@ -16,12 +16,16 @@ enum CONTEXTS {
     ALPHABET = "ALPHABET",
     GENDER = "GENDER",
     ANIMATE = "ANIMATE",
-    DECLINATION_TYPE = "DECLINATION_TYPE"
+    DECLINATION_TYPE = "DECLINATION_TYPE",
+    LANG_SETTINGS = "LANG_SETTINGS",
+    DIACRITICS = "DIACRITICS"
 }
 
 class ErrorWrapper {
     constructor(public context: CONTEXTS = CONTEXTS.NON, 
-                public error: Error | null = null) {};
+                public error: Error | null = null,
+                public lang: string = '',
+                public text: string = '') {};
 }
 
 class Language {
@@ -55,6 +59,18 @@ class Noun {
     }
 }
 
+class WordTranslations {
+    constructor(public lang: string = '', public translations: string[] = []) {}
+}
+
+class Example {
+    constructor(public text: string = '',  public translations: ExampleTranslation[] = []) {}
+}
+
+class ExampleTranslation {
+    constructor(public lang: string = '', public translation: string = '') {}
+}
+
 class AlphabetLetter {
     lang: string = ''; 
     letter: string = '';
@@ -86,7 +102,6 @@ class CharacteristicElement {
     constructor(public type: string, public description:string) {}
 }
 
-
 // class Gender {
 //     constructor(public type: string, public description:string) {}
 // }
@@ -99,20 +114,34 @@ class CharacteristicElement {
 //     constructor(public type: string, public description:string) {}
 // }
 
-
-class WordTranslations {
-    constructor(public lang: string = '', public translations: string[] = []) {}
+class LangSettings {
+    lang:string = '';
+    noun_singular_plural_sep:string = '';
+    unicode_range:string = '';
+    unicode_range_to_check:string = '';
+    unicode_diacritics_to_check:string = '';
+    alphabet_order1_name:string = '';
+    alphabet_order2_name:string = '';
+    alphabet_order3_name:string = '';
+    alphabet_order4_name:string = '';
+    alphabet_order5_name:string = '';
 }
 
-class Example {
-    constructor(public text: string = '',  public translations: ExampleTranslation[] = []) {}
+class Diacritic {
+    lang:string = '';
+    diacritic:string = '';
+    name_lang:string = '';
+    name:string = '';
+    transliteration:string = '';
+    IPA:string = '';
 }
 
-class ExampleTranslation {
-    constructor(public lang: string = '', public translation: string = '') {}
+class Diacritics {
+    diacritics: Diacritic[] = [];
 }
 
 export {ObjectWrapper, CONTEXTS, ErrorWrapper, Language, LanguagesPerRequest,
         Noun, WordTranslations, Example, ExampleTranslation, Characteristics,
-        AlphabetLetter, Alphabet, CharacteristicElement};
+        AlphabetLetter, Alphabet, CharacteristicElement, LangSettings, Diacritics,
+        Diacritic};
 

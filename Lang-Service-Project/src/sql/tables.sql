@@ -4,8 +4,9 @@ CREATE TABLE `animate` (
   PRIMARY KEY (`type`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 CREATE TABLE `category` (
-  `name` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`name`)
+  `category` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `parent_category` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`category`,`parent_category`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 CREATE TABLE `declination_accusative_case_ar` (
   `declination_type` char(2) CHARACTER SET utf8mb3 COLLATE utf8_unicode_ci NOT NULL,
@@ -127,6 +128,8 @@ CREATE TABLE `word_category` (
   `index` int NOT NULL,
   `category` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`lang`,`word`,`index`,`category`),
+  KEY `fk_word_category_category` (`category`),
+  CONSTRAINT `fk_word_category_category` FOREIGN KEY (`category`) REFERENCES `category` (`category`),
   CONSTRAINT `fk_word_category_lang` FOREIGN KEY (`lang`) REFERENCES `language` (`lang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8_unicode_ci;
 CREATE TABLE `lang`.`example_translation` (

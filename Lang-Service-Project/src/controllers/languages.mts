@@ -1,6 +1,7 @@
 import { FieldInfo, MysqlError } from "mysql";
 import { ConnectionManager } from "./connection_manager_ctrl.mjs";
-import { Alphabet, AlphabetLetter, CharacteristicElement, Characteristics, CONTEXTS, ErrorWrapper, Language, LanguagesPerRequest, ObjectWrapper } from "./TransfferedObjectsClasses.mjs";
+import { Alphabet, AlphabetLetter, CharacteristicElement, Characteristics, CONTEXTS, Diacritic, Diacritics, ErrorWrapper, LangSettings, Language, LanguagesPerRequest, ObjectWrapper } from "./TransfferedObjectsClasses.mjs";
+import { executeSQLOnDB, handleRequest } from "./utils.mjs";
 
 let availableLanguagesLoaded: boolean = false;
 let availableLanguages: Language[] = [];
@@ -62,46 +63,6 @@ function getLanguages(req:any, res:any) {
     });
 }
 
-async function getFromDB<T>(sql:string, funcProcessingResult: (results: any) => T): Promise<T> {
-    return new Promise<T>((resolve, reject) => {
-
-        ConnectionManager.getPool().query(sql, (err:MysqlError | null, 
-                                                res:any, 
-                                                fields: FieldInfo[]) => {
-
-            if (err) {
-                
-                reject(err);
-                return;
-            }
-
-            resolve(funcProcessingResult(res));
-
-        });
-
-    })
-    
-}
-
-function handleRequest(req:any, res:any,
-                       sql:string, contextForErrors: CONTEXTS,
-                       funcProcessingResult: (results: any) => any) {
-    getFromDB(sql, funcProcessingResult)
-    .then((result) => {
-
-        const objWrapper = new ObjectWrapper(result);
-
-        res.send(objWrapper);
-    })
-    .catch((error) => {
-
-        const objWrapper = new ObjectWrapper(null, [new ErrorWrapper(contextForErrors, error)]);
-
-        res.send(objWrapper);
-    });
-
-}
-
 function getAlphabet(req:any, res:any) {
     const sql = `select * from alphabet
                     where lang='${(req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang}'`;
@@ -150,8 +111,39 @@ function getAlphabet(req:any, res:any) {
         });
 }
 
+function getDiacritics(req:any, res:any) {
+    const sql = `select * from diacritics
+                    where lang='${(req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang}'`;
+    handleRequest(req, res, sql, CONTEXTS.DIACRITICS, 
+        (results) => {
+            const diacritics = new Diacritics();
 
-function processCaractRes(results:any):any {
+            results.forEach((el: {
+                                    lang:string,
+                                    diacritic:string,
+                                    name_lang:string,
+                                    name:string,
+                                    transliteration:string,
+                                    IPA:string,
+                                 }
+                            ) => {
+                const diacritic = new Diacritic();                
+                diacritic.lang = el.lang;
+                diacritic.diacritic = el.diacritic;
+                diacritic.name_lang = el.name_lang;
+                diacritic.name = el.name;
+                diacritic.transliteration = el.transliteration;
+                diacritic.IPA = el.IPA;
+
+                diacritics.diacritics.push(diacritic);
+            });
+
+            return diacritics;
+        });
+      
+}
+
+function processCaractResult(results:any):any {
     const elements: CharacteristicElement[] = [];
 
     results.forEach((el: {type: string, description:string}) => {
@@ -163,15 +155,15 @@ function processCaractRes(results:any):any {
 
 function getCharacteristics(req:any, res:any) {
     const sqlGender = `select * from gender`;
-    const promG = getFromDB<CharacteristicElement[]>(sqlGender, processCaractRes);
+    const promG = executeSQLOnDB<CharacteristicElement[]>(sqlGender, processCaractResult);
 
     const sqlAnimate = `select * from animate`;
-    const promA = getFromDB<CharacteristicElement[]>(sqlAnimate, processCaractRes);
+    const promA = executeSQLOnDB<CharacteristicElement[]>(sqlAnimate, processCaractResult);
 
     const sqlDeclinationType = 
             `select * from declination_type
                 where lang='${(req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang}'`;
-    const promD = getFromDB<CharacteristicElement[]>(sqlDeclinationType, processCaractRes);
+    const promD = executeSQLOnDB<CharacteristicElement[]>(sqlDeclinationType, processCaractResult);
 
     Promise.allSettled([promG, promA, promD])
     .then((results) => {
@@ -215,7 +207,41 @@ function getCharacteristics(req:any, res:any) {
 }
 
 function getLangSettings(req:any, res:any) {
-    
+    const sql = `select * from lang_settings
+                    where lang='${(req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang}'`;
+    handleRequest(req, res, sql, CONTEXTS.LANG_SETTINGS, 
+                  (results) => {
+                    const langSettings = new LangSettings();
+
+                    results.forEach((el: {
+                                            lang:string,
+                                            noun_singular_plural_sep:string,
+                                            unicode_range:string,
+                                            unicode_range_to_check:string,
+                                            unicode_diacritics_to_check:string,
+                                            alphabet_order1_name:string,
+                                            alphabet_order2_name:string,
+                                            alphabet_order3_name:string,
+                                            alphabet_order4_name:string,
+                                            alphabet_order5_name:string,
+                    
+                                         }
+                                    ) => {
+                        langSettings.lang = el.lang;
+                        langSettings.noun_singular_plural_sep = el.noun_singular_plural_sep;
+                        langSettings.unicode_range = el.unicode_range;
+                        langSettings.unicode_range_to_check = el.unicode_range_to_check;
+                        langSettings.unicode_diacritics_to_check = el.unicode_diacritics_to_check;
+                        langSettings.alphabet_order1_name = el.alphabet_order1_name;
+                        langSettings.alphabet_order2_name = el.alphabet_order2_name;
+                        langSettings.alphabet_order3_name = el.alphabet_order3_name;
+                        langSettings.alphabet_order4_name = el.alphabet_order4_name;
+                        langSettings.alphabet_order5_name = el.alphabet_order5_name;
+
+                    });
+
+                    return langSettings;
+                  });
 }
 
 // (function () {
@@ -224,4 +250,4 @@ function getLangSettings(req:any, res:any) {
 // })();
 
 export {getAvailableLanguagesSync, getLanguages, getAlphabet, getCharacteristics,
-        getLangSettings};
+        getLangSettings, getDiacritics};

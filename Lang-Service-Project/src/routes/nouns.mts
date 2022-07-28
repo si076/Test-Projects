@@ -1,12 +1,12 @@
 // import { Router} from 'express';
-import express from 'express'
+import e from 'express'
 import {getNouns, saveNouns} from '../controllers/nouns_ctrl.mjs'
 
 
-const router = express.Router();
+const nounsRouter = e.Router();
 
-router.get('/', getNouns);
+nounsRouter.get('/', getNouns);
 
-router.post('/', saveNouns);
+nounsRouter.post('/', saveNouns);
 
-export default router;
+export {nounsRouter};
