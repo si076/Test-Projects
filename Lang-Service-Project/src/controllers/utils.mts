@@ -45,6 +45,7 @@ function handleRequest(req:any, res:any,
         res.send(objWrapper);
     })
     .catch((error) => {
+        console.log(error);
 
         const objWrapper = new ObjectWrapper(null, [new ErrorWrapper(contextForErrors, error)]);
 

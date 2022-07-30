@@ -1,7 +1,7 @@
 import { FieldInfo, MysqlError } from "mysql";
 import { ConnectionManager } from "./connection_manager_ctrl.mjs";
 import { Alphabet, AlphabetLetter, CharacteristicElement, Characteristics, CONTEXTS, Diacritic, Diacritics, ErrorWrapper, LangSettings, Language, LanguagesPerRequest, ObjectWrapper } from "./TransfferedObjectsClasses.mjs";
-import { executeSQLOnDB, handleRequest } from "./utils.mjs";
+import { executeSQLOnDB, getAsListForSQL, handleRequest } from "./utils.mjs";
 
 let availableLanguagesLoaded: boolean = false;
 let availableLanguages: Language[] = [];
@@ -10,7 +10,7 @@ async function getAvailableLanguagesFromDB(): Promise<Language[]> {
     return await new Promise<Language[]>((resolve, reject) => {
         if (!availableLanguagesLoaded) {
     
-            console.log('Promis languages');
+            // console.log('Promis languages');
 
             const sql = `select * from language`;
             ConnectionManager.getPool().query(sql, (err:MysqlError | null, results:any, fields: FieldInfo[]) => {
@@ -32,7 +32,7 @@ async function getAvailableLanguagesFromDB(): Promise<Language[]> {
 
             });
         } else {
-            console.log('Loaded languages');
+            // console.log('Loaded languages');
 
             resolve(availableLanguages);
         }
@@ -45,17 +45,19 @@ function getAvailableLanguagesSync(): Language[] {
 }
 
 function getLanguages(req:any, res:any) {
+    console.log('-> getLanguages');
+
     getAvailableLanguagesFromDB()
     .then((result) => {
-        console.log('then');
-        console.log(result);
+        // console.log('then');
+        // console.log(result);
 
         const objWrapper = new ObjectWrapper(result);
 
         res.send(objWrapper);
     })
     .catch((error) => {
-        console.log('catch');
+        console.log(error);
 
         const objWrapper = new ObjectWrapper(null, [new ErrorWrapper(CONTEXTS.LANGUAGES, error)]);
 
@@ -64,8 +66,13 @@ function getLanguages(req:any, res:any) {
 }
 
 function getAlphabet(req:any, res:any) {
+    const lang = (req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang;
+    const langList = getAsListForSQL(prepareLangList(lang));
+
+    console.log('-> getAlphabet for: ' + langList);
+
     const sql = `select * from alphabet
-                    where lang='${(req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang}'`;
+                    where lang in (${langList})`;
 
     handleRequest(req, res, sql, CONTEXTS.ALPHABET, 
         (results) => {
@@ -112,8 +119,13 @@ function getAlphabet(req:any, res:any) {
 }
 
 function getDiacritics(req:any, res:any) {
+    const lang = (req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang;
+    const langList = getAsListForSQL(prepareLangList(lang));
+
+    console.log('-> getDiacritics for: ' + langList);
+
     const sql = `select * from diacritics
-                    where lang='${(req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang}'`;
+                    where lang in (${langList})`;
     handleRequest(req, res, sql, CONTEXTS.DIACRITICS, 
         (results) => {
             const diacritics = new Diacritics();
@@ -154,6 +166,7 @@ function processCaractResult(results:any):any {
 }
 
 function getCharacteristics(req:any, res:any) {
+    console.log('getCharacteristics');
     const sqlGender = `select * from gender`;
     const promG = executeSQLOnDB<CharacteristicElement[]>(sqlGender, processCaractResult);
 
@@ -207,11 +220,16 @@ function getCharacteristics(req:any, res:any) {
 }
 
 function getLangSettings(req:any, res:any) {
+    const lang = (req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang;
+    const langList = getAsListForSQL(prepareLangList(lang));
+
+    console.log('-> getLangSettings for: ' + langList);
+
     const sql = `select * from lang_settings
-                    where lang='${(req.app.locals.languagesPerRequest as LanguagesPerRequest).fromLang}'`;
+                    where lang in (${langList})`;
     handleRequest(req, res, sql, CONTEXTS.LANG_SETTINGS, 
                   (results) => {
-                    const langSettings = new LangSettings();
+                    const langsSettings: LangSettings[] = [];
 
                     results.forEach((el: {
                                             lang:string,
@@ -224,9 +242,10 @@ function getLangSettings(req:any, res:any) {
                                             alphabet_order3_name:string,
                                             alphabet_order4_name:string,
                                             alphabet_order5_name:string,
-                    
+                                            write_direction:string,
                                          }
                                     ) => {
+                        const langSettings = new LangSettings();
                         langSettings.lang = el.lang;
                         langSettings.noun_singular_plural_sep = el.noun_singular_plural_sep;
                         langSettings.unicode_range = el.unicode_range;
@@ -237,11 +256,23 @@ function getLangSettings(req:any, res:any) {
                         langSettings.alphabet_order3_name = el.alphabet_order3_name;
                         langSettings.alphabet_order4_name = el.alphabet_order4_name;
                         langSettings.alphabet_order5_name = el.alphabet_order5_name;
+                        langSettings.write_direction = el.write_direction;
 
+                        langsSettings.push(langSettings);
                     });
 
-                    return langSettings;
+                    return langsSettings;
                   });
+}
+
+function prepareLangList(lang: string): string[] {
+    let langList:string[] = [];
+    if (lang === '*') {
+        langList = availableLanguages.map(el => el.lang);
+    } else {
+        langList = [lang];
+    }
+    return langList;
 }
 
 // (function () {

@@ -16,7 +16,7 @@ app.locals.languagesPerRequest = new LanguagesPerRequest();
 app.use(cors());
 
 app.param('from_lang', function (req:any, res:any, next:any, paramValue:any) {
-    console.log('paramValue:' + paramValue);
+    console.log('param from_lang:' + paramValue);
 
     validateRequestedLanguage(paramValue);
     app.locals.languagesPerRequest.fromLang = paramValue;
@@ -25,7 +25,7 @@ app.param('from_lang', function (req:any, res:any, next:any, paramValue:any) {
 });
 
 app.param('to_lang', function (req:any, res:any, next:any, paramValue:any) {
-    console.log('paramValue:' + paramValue);
+    console.log('param to_lang:' + paramValue);
     if (paramValue === '*') { //all
         const availableLanguages = getAvailableLanguagesSync();
         app.locals.languagesPerRequest.toLang = 

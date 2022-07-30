@@ -125,6 +125,7 @@ class LangSettings {
     alphabet_order3_name:string = '';
     alphabet_order4_name:string = '';
     alphabet_order5_name:string = '';
+    write_direction:string = '';
 }
 
 class Diacritic {
