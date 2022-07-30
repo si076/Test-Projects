@@ -5,19 +5,33 @@
         <div *ngFor="let example of examples; index as i">
             <fieldset>
                 <legend>Example {{i + 1}}:</legend>
-                <div>
+                <div class="inline_flex_items_at_end" [ngClass]="exampleCompOrederStyle">
+                    <app-langmark [lang]="fromLang"></app-langmark>
                     <app-text-form [componentOrderStyle]="exampleCompOrederStyle" 
                                 [labelDirectStyle]="exampleLabelDirectStyle" 
                                 [inputDirectStyle]="exampleInputDirectStyle"
                                 [labelText]="exampleLabelText"
-                                [(textFromParent)]="example.text"></app-text-form>
+                                [(textFromParent)]="example.text">
+                    </app-text-form>
                 </div>
-                <div>
-                    <app-text-form [componentOrderStyle]="translationCompOrederStyle" 
-                                [labelDirectStyle]="translationLabelDirectStyle" 
-                                [inputDirectStyle]="translationInputDirectStyle"
+                <div *ngFor="let exampleTranslation of examplesTranslations[i]"
+                     class="inline_flex_items_at_end"
+                     [ngClass]="exampleTranslation.compOrederStyle">
+                    <app-langmark [lang]="exampleTranslation.lang"></app-langmark>
+                    <app-text-form  
+                                [componentOrderStyle]="exampleTranslation.compOrederStyle" 
+                                [labelDirectStyle]="exampleTranslation.labelDirectStyle" 
+                                [inputDirectStyle]="exampleTranslation.inputDirectStyle"
                                 [labelText]="translationLabelText"
-                                [(textFromParent)]="example.translation"></app-text-form>
+                                [(textFromParent)]="exampleTranslation.translationsAsString">
+                    </app-text-form>
+                </div>
+                <div *ngIf="availableLangsForTrans.length > 0">
+                    <button (click)="onAddTranslation(i)">Add translation</button>
+                    <select name="" id="" [(ngModel)]="langForTrans">
+                        <option *ngFor="let langForTransl of availableLangsForTrans" 
+                                [ngValue]="langForTransl.lang">{{langForTransl.description}}</option>
+                    </select>
                 </div>
             </fieldset>
         </div>

@@ -12,9 +12,10 @@ import { NounsComponent } from './nouns/nouns.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { ExampleComponent } from './examples/example/example.component';
 import { ExamplesFormComponent } from './forms/examples-form/examples-form.component';
-import { TranslationsFormComponent } from './forms/translations-form/translations-form.component';
 import { TextFormComponent } from './forms/text-form/text-form.component';
 import { NounFormComponent } from './forms/noun-form/noun-form.component';
+import { LangmarkComponent } from './langmark/langmark.component';
+import { LangtoolbarComponent } from './langtoolbar/langtoolbar.component';
 
 @NgModule({
   declarations: [
@@ -26,9 +27,10 @@ import { NounFormComponent } from './forms/noun-form/noun-form.component';
     ExamplesComponent,
     ExampleComponent,
     ExamplesFormComponent,
-    TranslationsFormComponent,
     TextFormComponent,
-    NounFormComponent
+    NounFormComponent,
+    LangmarkComponent,
+    LangtoolbarComponent
   ],
   imports: [
     BrowserModule,

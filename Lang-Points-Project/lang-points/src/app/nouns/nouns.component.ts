@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
-import { Noun } from './noun/noun';
+import { Noun, ObjectWrapper } from '../TransfferedObjectsClasses';
+import { UtilsService } from '../utils.service';
 
 @Component({
   selector: 'app-nouns',
@@ -15,20 +16,32 @@ export class NounsComponent implements OnInit {
 
   dialogInlineStyle = {display:'none'};
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService,
+              private utilsService: UtilsService) { }
 
   ngOnInit(): void {
-    this.dataService.getNouns().subscribe((data:any ) => {
 
-      console.log(data);
+    this.utilsService.openLoadingBox();
 
-      this.nouns = data;
+    this.dataService.getNouns()
+    .then((results) => {
+
+      this.nouns = results;
+
+      this.utilsService.closeLoadingBox();
+      
+    })
+    .catch((error) => {
+
+      this.utilsService.closeLoadingBox();
+
     });
+
   }
 
   onAddNoun() {
     this.currentNoun = new Noun();
-    // this.currentNoun.singularFullForm = 'Test2';
+
     this.dialogInlineStyle = {display:'block'};
   }  
 
@@ -42,13 +55,18 @@ export class NounsComponent implements OnInit {
   onSaveDialog() {
     const nounsToSave = [this.currentNoun];
 
-    this.dataService.saveNouns(nounsToSave).subscribe((data: any) => {
+    // this.dataService.saveNouns(nounsToSave).subscribe(
+    //   (data: any) => {
 
-      console.log('Save nouns response->');
-      console.log(data);
+    //   console.log('Save nouns response->');
+    //   console.log(data);
 
 
-    });
+    //   },
+    //   (error) => {
+
+    //   }
+    // );
   } 
 
 }

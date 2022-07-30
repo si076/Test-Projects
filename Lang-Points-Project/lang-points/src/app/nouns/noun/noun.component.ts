@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { DataService } from 'src/app/data.service';
+import { Noun } from 'src/app/TransfferedObjectsClasses';
 import { UtilsService } from 'src/app/utils.service';
-import { Noun } from './noun';
+import { TranslObjInt } from 'src/app/InternalClasses';
 
 @Component({
   selector: 'app-noun',
@@ -12,27 +13,31 @@ export class NounComponent implements OnInit {
 
   componentOrderStyle: string = '';
   wordTextDirectionStyle: string = '';
-  transTextDirectStyle: string = '';
 
   // translations: string = '';
 
   @Input()
   noun: Noun  = new Noun(); 
 
-  constructor(private utilsService: UtilsService) { }
+  translations: TranslObjInt[] = [];
+
+
+  constructor(private utilsService: UtilsService,
+              private dataService: DataService) { }
 
   ngOnInit(): void {
     this.componentOrderStyle = this.utilsService.getFromLangFlowStyle();
     
     this.wordTextDirectionStyle = this.utilsService.getFromLangDirectionStyle(); 
+
+    this.noun.translations.forEach(el => {
       
-    this.transTextDirectStyle = this.utilsService.getToLangDirectionStyle();
-
-    // console.log(this.noun.translations);
-
-    // this.noun.translations.forEach(el => { this.translations += ' ' + el});
-
-    // console.log(this.translations);
+      this.translations.push(TranslObjInt.createTranslObjInt(el.lang, 
+                                                             el.translations.join(),
+                                                             this.dataService,
+                                                             this.utilsService));
+    });
+    
   }
 
 }

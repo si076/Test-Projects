@@ -5,6 +5,8 @@
 
 .noun_form_word_wrapper {
     display: flex;
+    align-items: flex-end;
+    justify-items: flex-end;
     /* margin-left: 10px;
     margin-right: 10px; */
 }
@@ -12,6 +14,11 @@
 .noun_form_vert_alignment_box {
     display: flex;
     flex-direction: column;
+}
+
+.noun_form_singular_plural_sep {
+    margin-left: 3px;
+    margin-right: 3px;
 }
 
 .noun_form_word_box {
@@ -22,3 +29,4 @@
 .noun_form_examples_pane {
     margin-top: 10px;
 }
+

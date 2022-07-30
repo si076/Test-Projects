@@ -4,15 +4,16 @@
 
         <div class="home_lang home_from_lang">
             <label for="from_lang">I am interested in language:</label>
-            <select name="from_lang" id="from_lang" [(ngModel)]="fromLang">
-                <option value="ar">اللغة العربية (Arabic)</option>
+            <select name="from_lang" id="from_lang" [(ngModel)]="fromLang" (change)="onFromLangChange()">
+                <option *ngFor="let lang of fromLangs" 
+                        [ngValue]="lang.lang">{{lang.description}}</option>
             </select>
         </div>
         <div class="home_lang home_to_lang">
             <label for="to_lang">I would like translation in language:</label>
             <select name="to_lang" id="to_lang" [(ngModel)]="toLang">
-                <option value="bg">Български (Bulgarian)</option>
-                <option value="en">English</option>
+                <option *ngFor="let lang of toLangs" 
+                        [ngValue]="lang.lang">{{lang.description}}</option>
             </select>
         </div>
         <div class="home_go">

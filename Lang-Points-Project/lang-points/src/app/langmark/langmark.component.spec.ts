@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TranslationsFormComponent } from './translations-form.component';
+import { LangmarkComponent } from './langmark.component';
 
-describe('TranslationsFormComponent', () => {
-  let component: TranslationsFormComponent;
-  let fixture: ComponentFixture<TranslationsFormComponent>;
+describe('LangmarkComponent', () => {
+  let component: LangmarkComponent;
+  let fixture: ComponentFixture<LangmarkComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TranslationsFormComponent ]
+      declarations: [ LangmarkComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TranslationsFormComponent);
+    fixture = TestBed.createComponent(LangmarkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,47 @@
+.langtoolbar_box {
+    display: grid;
+
+    opacity: 1;
+    min-height: 30px;
+    height: 30px;
+    max-height: 30px;
+
+    align-items: center;
+    justify-items: center;
+    /* border-width: 2px;
+    border-color: red;
+    border-style: solid; */
+}
+
+.langtoolbar_arrow_span {
+    min-width: 24px;
+    width: 24px;
+    max-width: 24px;
+    min-height: 24px;
+    height: 24px;
+    max-height: 24px;
+    opacity: 1;
+    color: white;
+
+}
+
+.langtoolbar_site_lang_span {
+    box-sizing: border-box;
+
+    min-width: 30px;
+    width: 30px;
+    max-width: 30px;
+    min-height: 30px;
+    height: 30px;
+    max-height: 30px;
+    border-width: 2px;
+    border-style: solid;
+
+    opacity: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.langtoolbar_wrapper {
+    display: inline-flex;
+}

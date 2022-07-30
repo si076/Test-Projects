@@ -1,7 +1,9 @@
 <div class="app_content">
 <!-- Toolbar -->
   <div class="app_toolbar" role="banner">
-    <span class="app_toolbar_span" [routerLink]="''">Lang Points</span>
+    <div class="app_toolbar_span" [routerLink]="''">Lang Points</div>
+    <div class="app_toolbar_lang" [ngStyle]="langtoolbarInlineStyle"><app-langtoolbar></app-langtoolbar></div>
+  
   </div>
 
 
@@ -13,4 +15,8 @@
   <footer class="app_footer">
   </footer>
 
+</div>
+<div class="app_loading_modal_box" [ngStyle]="loadingBoxInlineStyle">
+  <span class="app_loading_modal_box_cont">
+  </span>
 </div>

@@ -20,3 +20,9 @@ body, html {
 .direction_rtl {
     direction: rtl;
 }
+
+.inline_flex_items_at_end {
+    display: inline-flex;
+    align-items: flex-end;
+    justify-items: flex-end;
+}

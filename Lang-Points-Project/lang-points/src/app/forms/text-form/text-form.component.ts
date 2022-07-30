@@ -7,7 +7,9 @@ import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChange
 })
 export class TextFormComponent implements OnInit, OnChanges {
 
+  @Input()
   inputSize = 100;
+  @Input()
   textMaxLength = 500;
 
   remainingCharacters = '0/' + this.textMaxLength;

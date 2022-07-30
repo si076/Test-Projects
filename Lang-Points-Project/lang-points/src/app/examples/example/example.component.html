@@ -2,7 +2,9 @@
     <div class="example_margins" [ngClass]="wordTextDirectionStyle">
         {{example.text}}
     </div>
-    <div class="example_margins" [ngClass]="transTextDirectStyle">
-        {{example.translation}}
+    <div *ngFor="let transl of example.translations; index as i" class="example_margins" 
+         [ngClass]="exampleTranslations[i].compOrederStyle">
+        <app-langmark [lang]="exampleTranslations[i].lang"></app-langmark>
+        <div [ngClass]="exampleTranslations[i].inputDirectStyle">{{exampleTranslations[i].translationsAsString}}</div>
     </div>
 </div>

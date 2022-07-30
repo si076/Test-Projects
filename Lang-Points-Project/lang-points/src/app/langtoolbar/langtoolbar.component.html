@@ -1,0 +1,8 @@
+<div class="langtoolbar_wrapper">
+    <span class="langtoolbar_site_lang_span" [ngStyle]="siteLangInlineStyle"></span>
+    <div class="langtoolbar_box" [ngStyle]="boxInlineStyle">
+        <app-langmark [lang]="fromLang"></app-langmark>
+        <span class="langtoolbar_arrow_span">&rArr;</span>
+        <app-langmark *ngFor="let langmark of toLang" [lang]="langmark"></app-langmark>
+    </div>
+</div>

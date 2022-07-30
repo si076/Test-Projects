@@ -1,31 +1,24 @@
 import { Injectable } from '@angular/core';
+import { AppComponent } from './app.component';
+import { DataService } from './data.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
 
-  fromLang: string = '';
-  toLang: string = '';
+  private appCom: AppComponent | null = null;
 
-  constructor() { }
-
-  setLangs(fromLang: string, toLang: string) {
-    this.fromLang = fromLang;
-    this.toLang = toLang;
-  }
+  constructor(private dataService: DataService) { }
 
   getDirection(lang: string): 'rtl' | 'ltr' {
     let direction: 'rtl' | 'ltr' = 'ltr';
 
-    switch (lang) {
-      case 'ar': {
-        direction = 'rtl';
-        break;
-      }
-      default: {
-        direction = 'ltr';
-      }
+    const langSettings = this.dataService.getLangSettingsSync(lang);
+    if (langSettings) {
+      direction = langSettings.write_direction as 'rtl' | 'ltr';
+
+      console.log('direction for lang: ' + lang + ' ' + direction);
     }
 
     return direction;
@@ -43,6 +36,8 @@ export class UtilsService {
         style = 'ltr_row_flow';
       }
     }
+
+    console.log('flow for lang: ' + lang + ' ' + style);
 
     return style;
   }
@@ -64,18 +59,47 @@ export class UtilsService {
   }
 
   getFromLangFlowStyle(): string {
-    return this.getFlowStyle(this.fromLang);
+    return this.getFlowStyle(this.dataService.getFromLang().lang);
   }
 
   getFromLangDirectionStyle(): string {
-    return this.getDirectionStyle(this.fromLang);
+    return this.getDirectionStyle(this.dataService.getFromLang().lang);
   }
-  getToLangFlowStyle(): string {
-    return this.getFlowStyle(this.toLang);
+  getSiteLangFlowStyle(): string {
+    return this.getFlowStyle(this.dataService.getSiteLang().lang);
   }
-  getToLangDirectionStyle(): string {
-    return this.getDirectionStyle(this.toLang);
+  getSiteLangDirectionStyle(): string {
+    return this.getDirectionStyle(this.dataService.getSiteLang().lang);
   }
+
+  setAppRef(appCom: AppComponent) {
+    this.appCom = appCom;
+  }
+ 
+  showLangToolbar() {
+    if (this.appCom) {
+      this.appCom.showLangToolbar();
+    }
+  }
+
+  hideLangToolbar() {
+    if (this.appCom) {
+      this.appCom.hideLangToolbar();
+    }
+  }
+
+  openLoadingBox() {
+    if (this.appCom) {
+      this.appCom.openLoadingBox();
+    }
+  }
+
+  closeLoadingBox() {
+    if (this.appCom) {
+      this.appCom.closeLoadingBox();
+    }
+  }
+ 
 }
 
 
